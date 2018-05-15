@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Picaflic</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Picaflic</h1>
+
+            <form name="search-form">
+                <input id="query" type="text" placeholder="Search on IMDB"/>
+                <input  type="submit" value="Search" id="submit"/>
+            </form>
+            
+            <div id="search-results">
+                <ul></ul>      
+            </div>
+        </div>
+    </body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', 
+        function(event) {
+            console.log("loaded")
+        
+            const searchForm = document.forms['search-form'];
+            searchForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                let searchQuery = document.getElementById('query').value
+                console.log(`${searchQuery}`);
+                document.getElementById('query').value = ''
+            });
+        })
+        
+
+        // $('#search-form').submit(function(event){
+        //     event.preventDefault();
+        //     var searchTerm = $('#query').val();
+        //     console.log(searchTerm);
+            
+        //     $.getJSON('http://www.omdbapi.com/?s=' + searchTerm + '&r=json', function(data){
+        //         showResults(data.Search);
+        //     });
+        // });
+
+        // function showResults(results){
+        //     var html = "";
+        //     var i = 1;
+            
+        //     $.each(results, function(index,value){
+        //         html += '<li>' + i + '' + value.Title + '</li>';
+        //         console.log(value.Title);
+        //         i++;
+        //     });
+            
+        //     $('#search-results ul').html(html);
+        // }
+    </script>
+</html>
