@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <title>Picaflic</title>
     </head>
     <body>
@@ -11,48 +13,76 @@
                 <input  type="submit" value="Search" id="submit"/>
             </form>
             
-            <div id="search-results">
-                <ul></ul>      
-            </div>
+            <div id="search-results"></div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', 
+            function(event) {
+                console.log("loaded")
+
+                // SEARCH AND APPEND RESULTS
+                const searchForm = document.forms['search-form'];
+                searchForm.addEventListener("submit", findMovieByName);
+
+                // Perform a search through OMDB
+                function findMovieByName(event) {
+                    event.preventDefault();
+                    // Capture search term
+                    let searchTerm = document.getElementById('query').value;
+
+                    // Use fetch to create a promise that returns matches if successful or an error message if nothing is found
+                    const filmListPromise = fetch(`http://www.omdbapi.com/?apikey=efb7e3d0&type=movie&r=json&s=${searchTerm}`);
+                    filmListPromise
+                        .then(data => data.json())
+                        .then(data => { 
+                            console.log(data)
+                            appendFilmList(data)
+                            hydrateFilmDetails(data)
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        })
+
+                    document.getElementById('query').value = ''
+                }
+
+                // When results are successfully found, append them to the search-results container
+                function appendFilmList(data) {
+                    let filmList = data.Search;
+                    const resultContainer = document.getElementById('search-results');
+                    const markup = `
+                    <ul>
+                        ${filmList.map(film => 
+                            `<li id='${film.imdbID}' class='film'>${film.Title}</li>`
+                        ).join('')}
+                    </ul>
+                    `;
+
+                    resultContainer.innerHTML = markup;
+                }
+
+                // RETRIEVE AND SHOW/HIDE DETAILS
+                function hydrateFilmDetails(data) {
+                    let filmList = data.Search;
+                    for (film of filmList) {
+                        let filmDetailPromise = fetch(`http://www.omdbapi.com/?apikey=efb7e3d0&type=movie&r=json&i=${film.imdbID}`);
+                        filmDetailPromise
+                        .then(data => data.json())
+                        .then(data => { 
+                            appendDetail(data)
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        })
+                    }
+                }
+
+                function appendDetail(data) {
+                    
+                }
+            }
+            );
+        </script>
     </body>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', 
-        function(event) {
-            console.log("loaded")
-        
-            const searchForm = document.forms['search-form'];
-            searchForm.addEventListener("submit", function(event) {
-                event.preventDefault();
-                let searchQuery = document.getElementById('query').value
-                console.log(`${searchQuery}`);
-                document.getElementById('query').value = ''
-            });
-        })
-        
-
-        // $('#search-form').submit(function(event){
-        //     event.preventDefault();
-        //     var searchTerm = $('#query').val();
-        //     console.log(searchTerm);
-            
-        //     $.getJSON('http://www.omdbapi.com/?s=' + searchTerm + '&r=json', function(data){
-        //         showResults(data.Search);
-        //     });
-        // });
-
-        // function showResults(results){
-        //     var html = "";
-        //     var i = 1;
-            
-        //     $.each(results, function(index,value){
-        //         html += '<li>' + i + '' + value.Title + '</li>';
-        //         console.log(value.Title);
-        //         i++;
-        //     });
-            
-        //     $('#search-results ul').html(html);
-        // }
-    </script>
 </html>
