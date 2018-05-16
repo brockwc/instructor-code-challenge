@@ -54,7 +54,10 @@
                     const markup = `
                     <ul>
                         ${filmList.map(film => 
-                            `<li id='${film.imdbID}' class='film'>${film.Title}</li>`
+                            `<li class='film'>
+                                ${film.Title}
+                                <div id='${film.imdbID}' style='display:none'></div>
+                            </li>`
                         ).join('')}
                     </ul>
                     `;
@@ -65,12 +68,14 @@
                 // RETRIEVE AND SHOW/HIDE DETAILS
                 function hydrateFilmDetails(data) {
                     let filmList = data.Search;
+
                     for (film of filmList) {
                         let filmDetailPromise = fetch(`http://www.omdbapi.com/?apikey=efb7e3d0&type=movie&r=json&i=${film.imdbID}`);
                         filmDetailPromise
-                        .then(data => data.json())
-                        .then(data => { 
-                            appendDetail(data)
+                        .then(filmData => filmData.json())
+                        .then(filmData => { 
+                            appendDetail(filmData)
+                            detailToggle()
                         })
                         .catch((err) => {
                             console.error(err);
@@ -78,8 +83,34 @@
                     }
                 }
 
-                function appendDetail(data) {
+                function appendDetail(filmData) {
+                    let filmDetailContainer = document.getElementById(`${filmData.imdbID}`)
+                    const detailMarkup = `
+                        <p class="year">${filmData.Year}</p>
+                        <p class="writer">${filmData.Writer}</p>
+                        <p class="director">${filmData.Director}</p>
+                        <p class="actors">${filmData.Actors}</p>
+                        <p class="plot">${filmData.Plot}</p>
+                        <p class="rated">${filmData.Rated}</p>
+                    `;
                     
+                    filmDetailContainer.innerHTML = detailMarkup;
+                }
+
+                function detailToggle() {
+                    let foundFilms = document.getElementsByClassName('film')
+
+                    for (foundFilm of foundFilms) {
+                        foundFilm.onclick = function() {
+                            let filmDetails = this.firstElementChild;
+                            
+                            if (filmDetails.style.display === 'none') {
+                                filmDetails.style.display = 'block'
+                            } else {
+                                filmDetails.style.display = 'none'
+                            }
+                        }
+                    }
                 }
             }
             );
