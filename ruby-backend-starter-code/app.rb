@@ -10,13 +10,13 @@ get 'favorites' do
   File.read('data.json')
 end
 
-get '/favorites' do
+post '/favorites' do
   file = JSON.parse(File.read('data.json'))
   unless params[:name] && params[:oid]
     return 'Invalid Request'
   end
   movie = { name: params[:name], oid: params[:oid] }
+  movie.to_json
   file << movie
   File.write('data.json', JSON.pretty_generate(file))
-  movie.to_json
 end
