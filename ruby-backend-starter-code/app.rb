@@ -2,12 +2,12 @@ require 'sinatra'
 require 'pry'
 
 get '/' do
-  File.read('views/index.html')
+  erb :index
 end
 
 get '/favorites' do
   response.header['Content-Type'] = 'application/json'
-  File.read('data.json')
+  @file = File.read('data.json')
 end
 
 post '/favorites' do
@@ -22,5 +22,5 @@ post '/favorites' do
   File.write('data.json',JSON.pretty_generate(file))
   movie.to_json
 
-  redirect '/'
+  redirect to('/')
 end
