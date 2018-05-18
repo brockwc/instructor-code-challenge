@@ -2,5 +2,8 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 
-# debugging tool 
-gem 'pry'
+# development tools
+group :development do
+    #easy ruby debugging
+    gem 'pry'
+end
