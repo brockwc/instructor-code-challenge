@@ -2,6 +2,7 @@ require 'sinatra'
 require 'pry'
 
 get '/' do
+  @faves = JSON.parse(File.read('data.json'))
   erb :index
 end
 
