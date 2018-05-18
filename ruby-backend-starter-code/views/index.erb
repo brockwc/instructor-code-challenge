@@ -8,6 +8,14 @@
         <div class="container">
             <h1>Picaflic</h1>
 
+            <p><a href="javascript:void(0)" id="favorite-film-toggle">My Favorites</a></p>
+
+            <ul id="favorites-container" style="display:none">
+                <% @faves.each do |f| %>
+                    <li><%= f["name"] %></li>
+                <% end %>
+            </ul>
+
             <form name="search-form">
                 <input id="query" type="text" placeholder="Search on IMDB"/>
                 <input  type="submit" value="Search" id="submit"/>
@@ -65,7 +73,7 @@
                     resultContainer.innerHTML = markup;
                 }
 
-                // RETRIEVE AND SHOW/HIDE DETAILS
+                // RETRIEVE, APPEND, AND SHOW/HIDE FILM DETAILS
                 function hydrateFilmDetails(data) {
                     let filmList = data.Search;
 
@@ -83,6 +91,7 @@
                     }
                 }
 
+                // This uses the film ID to find where to place the details and the markup to do it
                 function appendDetail(filmData) {
                     let filmDetailContainer = document.getElementById(`${filmData.imdbID}`)
                     const detailMarkup = `
@@ -102,6 +111,7 @@
                     filmDetailContainer.innerHTML = detailMarkup;
                 }
 
+                // This provides toggling behaviour for showing and hiding the details to the user
                 function detailToggle() {
                     let foundFilms = document.getElementsByClassName('film')
 
@@ -115,6 +125,18 @@
                                 filmDetails.style.display = 'none'
                             }
                         }
+                    }
+                }
+
+                // SHOW LIST OF FAVORITES
+                const faveFilmToggle = document.getElementById('favorite-film-toggle')
+                const faveFilmsList = document.getElementById('favorites-container')
+
+                faveFilmToggle.onclick = function() {
+                    if (faveFilmsList.style.display === 'none') {
+                        faveFilmsList.style.display = 'block'
+                    } else {
+                        faveFilmsList.style.display = 'none'
                     }
                 }
             }
