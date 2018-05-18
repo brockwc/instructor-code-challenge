@@ -86,6 +86,11 @@
                 function appendDetail(filmData) {
                     let filmDetailContainer = document.getElementById(`${filmData.imdbID}`)
                     const detailMarkup = `
+                        <form name="new-favorite" action="/favorites" method="post">
+                            <input type="hidden" name="name" value="${filmData.Title}">
+                            <input type="hidden" name="oid" value="${filmData.imdbID}">
+                            <input type="submit" value="Favourite" id="submit"/>
+                        </form>
                         <p class="year">${filmData.Year}</p>
                         <p class="writer">${filmData.Writer}</p>
                         <p class="director">${filmData.Director}</p>
