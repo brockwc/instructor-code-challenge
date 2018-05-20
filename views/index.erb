@@ -40,11 +40,11 @@
                     let searchTerm = document.getElementById('query').value;
 
                     // Use fetch to create a promise that returns matches if successful or an error message if nothing is found
-                    const urlParams = new URLSearchParams();
-                    urlParams.append('apikey', 'efb7e3d0');
-                    urlParams.append('type', 'movie');
-                    urlParams.append('r', 'json');
-                    urlParams.append('s', `${searchTerm}`)
+                    let urlParams = new URLSearchParams();
+                        urlParams.append('apikey', 'efb7e3d0');
+                        urlParams.append('type', 'movie');
+                        urlParams.append('r', 'json');
+                        urlParams.append('s', `${searchTerm}`)
 
                     const filmListPromise = fetch(`https://www.omdbapi.com/?${urlParams}`);
                     filmListPromise
@@ -84,7 +84,13 @@
                     let filmList = data.Search;
 
                     for (film of filmList) {
-                        let filmDetailPromise = fetch(`http://www.omdbapi.com/?apikey=efb7e3d0&type=movie&r=json&i=${film.imdbID}`);
+                        let filmUrlParams = new URLSearchParams();
+                            filmUrlParams.append('apikey', 'efb7e3d0');
+                            filmUrlParams.append('type', 'movie');
+                            filmUrlParams.append('r', 'json');
+                            filmUrlParams.append('i', `${film.imdbID}`)
+
+                        let filmDetailPromise = fetch(`https://www.omdbapi.com/?${filmUrlParams}`);
                         filmDetailPromise
                         .then(filmData => filmData.json())
                         .then(filmData => { 
