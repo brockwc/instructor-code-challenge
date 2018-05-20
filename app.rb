@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 
 get '/' do
   @faves = JSON.parse(File.read('data.json'))
