@@ -46,7 +46,7 @@
                     urlParams.append('r', 'json');
                     urlParams.append('s', `${searchTerm}`)
 
-                    const filmListPromise = fetch(`http://www.omdbapi.com/?${urlParams}`);
+                    const filmListPromise = fetch(`https://www.omdbapi.com/?${urlParams}`);
                     filmListPromise
                         .then(data => data.json())
                         .then(data => { 
