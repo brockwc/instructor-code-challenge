@@ -40,7 +40,13 @@
                     let searchTerm = document.getElementById('query').value;
 
                     // Use fetch to create a promise that returns matches if successful or an error message if nothing is found
-                    const filmListPromise = fetch(`http://www.omdbapi.com/?apikey=efb7e3d0&type=movie&r=json&s=${searchTerm}`);
+                    const urlParams = new URLSearchParams();
+                    urlParams.append('apikey', 'efb7e3d0');
+                    urlParams.append('type', 'movie');
+                    urlParams.append('r', 'json');
+                    urlParams.append('s', `${searchTerm}`)
+
+                    const filmListPromise = fetch(`http://www.omdbapi.com/?${urlParams}`);
                     filmListPromise
                         .then(data => data.json())
                         .then(data => { 
