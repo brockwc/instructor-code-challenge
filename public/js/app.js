@@ -12,13 +12,15 @@ function(event) {
         // Capture search term
         let searchTerm = document.getElementById('query').value;
 
-        // Use fetch to create a promise that returns matches if successful or an error message if nothing is found
+        // Build our URL Params based on the provided search
         let urlParams = new URLSearchParams();
             urlParams.append('apikey', 'efb7e3d0');
             urlParams.append('type', 'movie');
             urlParams.append('r', 'json');
             urlParams.append('s', `${searchTerm}`)
-
+        
+        // Use fetch and our urlParams to create a promise that returns matches 
+        // if successful or an error message if nothing is found
         const filmListPromise = fetch(`https://www.omdbapi.com/?${urlParams}`);
         filmListPromise
             .then(data => data.json())
@@ -42,7 +44,7 @@ function(event) {
         <ul>
             ${filmList.map(film => 
                 `<li class='film'>
-                    ${film.Title}
+                    <span class="title">${film.Title}</span>
                     <div id='${film.imdbID}' style='display:none'></div>
                 </li>`
             ).join('')}
@@ -80,17 +82,17 @@ function(event) {
     function appendDetail(filmData) {
         let filmDetailContainer = document.getElementById(`${filmData.imdbID}`)
         const detailMarkup = `
+            <p class="year">Release Year: ${filmData.Year}</p>
+            <p class="writer">Writer: ${filmData.Writer}</p>
+            <p class="director">Director: ${filmData.Director}</p>
+            <p class="actors">Actors: ${filmData.Actors}</p>
+            <p class="plot">Plot: ${filmData.Plot}</p>
+            <p class="rated">Rated: ${filmData.Rated}</p>
             <form name="new-favorite" action="/favorites" method="post">
                 <input type="hidden" name="name" value="${filmData.Title}">
                 <input type="hidden" name="oid" value="${filmData.imdbID}">
-                <input type="submit" value="Favourite" id="submit"/>
+                <input type="submit" value="Favourite" id="submit" />
             </form>
-            <p class="year">${filmData.Year}</p>
-            <p class="writer">${filmData.Writer}</p>
-            <p class="director">${filmData.Director}</p>
-            <p class="actors">${filmData.Actors}</p>
-            <p class="plot">${filmData.Plot}</p>
-            <p class="rated">${filmData.Rated}</p>
         `;
         
         filmDetailContainer.innerHTML = detailMarkup;
@@ -102,12 +104,14 @@ function(event) {
 
         for (foundFilm of foundFilms) {
             foundFilm.onclick = function() {
-                let filmDetails = this.firstElementChild;
+                let filmDetails = this.lastElementChild;
                 
                 if (filmDetails.style.display === 'none') {
-                    filmDetails.style.display = 'block'
+                    this.style.border = '1px dotted lightgrey';
+                    filmDetails.style.display = 'block';
                 } else {
-                    filmDetails.style.display = 'none'
+                    filmDetails.style.display = 'none';
+                    this.style.border = 'none';
                 }
             }
         }
