@@ -2,45 +2,22 @@
 
 ## WDI Instructor Code Challenge
 
-### GOAL 
+### About Picaflic 
 
-> Create a single page application that will utilize an external API to request movie data. The client side application will be served by a back-end which will have the ability to persist data.
+> Picaflic all started when one man asked the age old question: how is one to keep track of hundreds (likely thousands) of their favourite movies? He soon found out he wasn't the only one asking. You've probably asked yourself this same question a lot. We wanted to finally give you an answer.
 
-#### Back-end Instructions
+> Picaflic wanted to break the mold when it comes to searching for and saving the movies you really, really, really, really love. Finally you and your loved ones can search, find, and save, all in one place. Here's what some people might have said about it. It's impossible to know if they haven't.
 
-- Within this repo you will have noticed two folders entitled `node-backend-starter-code` and `ruby-backend-starter-code`. Each of these contains similar back-ends written in frameworks respective to their languages - Sinatra for Ruby and Express for Node.
+#### "Picaflic literally saved my life"
+ - Quentin Tarantino, famous man
+#### "Truly, I think, as brave as when we got rid of the headphone jack."
+ - Tim Cook, famous business person
+#### "I mean no, it's not one of the reasons I decided to start making movies. It's the only reason."
+ - JRR Tolkein, owner of four initials
 
-- Please **choose one** of the back-ends before you proceed. Feel free to pick whichever language you feel more comfortable in.
+> So without further ado, let's get you started on the same platform that probably literally saved a life, bravely, and also inspired someone. 
 
-- Both back-ends contain several errors that commonly made by students, so you will need to do some debugging to ensure they are working correctly.
+[Picaflic](https://thawing-dusk-87577.herokuapp.com/)
 
-#### Front-end Instructions
-
-- Use Vanilla Javascript to complete.
-
-- The page should have a form that uses the [OMDBapi](http://www.omdbapi.com/) to search for matching movies and then display the results.
- - *Example*: If a user searches for `Star Wars`, a list of every Star Wars movie will be displayed.
-
-- When the user clicks on a search result display detailed information about that movie.
-  - *Example*: If a user is viewing a list of every Star Wars movie and clicks on `Star Wars: A New Hope`, detailed information about that specific movie will be displayed.
-
-- Users should be able to "favorite" a movie and have it persisted via the provided back-end.
-
-- Provide a link to display favorited movies.
-
-#### Things we are looking for
-
-- Clear, simple code
-- Explanatory comments for beginners
-- Consistent Naming Conventions
-- Valid HTML, CSS, and JavaScript
-
-#### Deliverables
-
-- Please send us back a link to a git repo with the completed code challenge. 
-
-- Include a README.md file in your repo with a link to your application deployed on Heroku or Digital Ocean.
-
-#### Bonus
-
-- Rewrite the application using a JavaScript MVC library. Include a readme that explains the benefits and any additional challenges students would face learning the library
+### To the GA Team
+Just wanted to include a quick thanks for considering me for the position
