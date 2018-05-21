@@ -6,12 +6,12 @@ get '/' do
   erb :index
 end
 
-get '/favorites' do
+get '/favourites' do
   response.header['Content-Type'] = 'application/json'
   @file = File.read('data.json')
 end
 
-post '/favorites' do
+post '/favourites' do
   file = JSON.parse(File.read('data.json'))
 
   unless params[:name] && params[:oid]

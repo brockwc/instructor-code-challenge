@@ -88,7 +88,7 @@ function(event) {
             <p class="actors">Actors: ${filmData.Actors}</p>
             <p class="plot">Plot: ${filmData.Plot}</p>
             <p class="rated">Rated: ${filmData.Rated}</p>
-            <form name="new-favorite" action="/favorites" method="post">
+            <form name="new-favourite" action="/favourites" method="post">
                 <input type="hidden" name="name" value="${filmData.Title}">
                 <input type="hidden" name="oid" value="${filmData.imdbID}">
                 <input type="submit" value="Favourite" id="submit" />
@@ -117,9 +117,9 @@ function(event) {
         }
     }
 
-    // SHOW LIST OF FAVORITES
-    const faveFilmToggle = document.getElementById('favorite-film-toggle')
-    const faveFilmsList = document.getElementById('favorites-container')
+    // This provides toggling behaviour for showing and hiding the list of favourited films
+    const faveFilmToggle = document.getElementById('favourite-film-toggle')
+    const faveFilmsList = document.getElementById('favourites-container')
 
     faveFilmToggle.onclick = function() {
         if (faveFilmsList.style.display === 'none') {
