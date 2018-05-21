@@ -10,23 +10,26 @@
         <script src="../js/app.js"></script>
     </head>
     <body>
-        <div class="container">
+    <div class="hero">
             <h1>Picaflic</h1>
-
-            <p><a href="javascript:void(0)" id="favorite-film-toggle">My Favorites</a></p>
-
-            <ul id="favorites-container" style="display:none">
-                <% @faves.each do |f| %>
-                    <li><%= f["name"] %></li>
-                <% end %>
-            </ul>
 
             <form name="search-form">
                 <input id="query" type="text" placeholder="Search on IMDB"/>
                 <input  type="submit" value="Search" id="submit"/>
             </form>
-            
+        </div>
+        <div class="container">
             <div id="search-results"></div>
+
+            <div class="favorites">
+                <p><a href="javascript:void(0)" id="favorite-film-toggle">My Favourites</a></p>
+
+                <ul id="favorites-container" style="display:none">
+                    <% @faves.each do |f| %>
+                        <li><%= f["name"] %></li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
     </body>
 </html>

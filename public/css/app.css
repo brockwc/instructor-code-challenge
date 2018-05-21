@@ -1,0 +1,66 @@
+/* Fonts & Base Style Stuff */
+html {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+a {
+    color: royalblue;
+}
+
+/* Structure Stuff */
+.hero {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    padding: 0 20px;
+}
+
+.container #search-results {
+    display: inline-block;
+    width: 70%;
+}
+
+.container .favorites {
+    display: inline-block;
+    float: right;
+    width: 25%;
+}
+
+/* Element-specific stuff */
+.film {
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    padding: 10px 20px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.film:hover {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.film:hover .title {
+    color: royalblue;
+    text-decoration: underline;
+}
+
+.film .title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
